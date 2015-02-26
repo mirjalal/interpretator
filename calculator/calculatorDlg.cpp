@@ -6,6 +6,8 @@
 #include "calculator.h"
 #include "calculatorDlg.h"
 #include "afxdialogex.h"
+#include <functional>
+#include <numeric>
 #include <algorithm>
 #include <fstream>
 #include <vector>
@@ -22,13 +24,13 @@ class CAboutDlg : public CDialogEx
 public:
 	CAboutDlg();
 
-// Dialog Data
+	// Dialog Data
 	enum { IDD = IDD_ABOUTBOX };
 
-	protected:
+protected:
 	virtual void DoDataExchange(CDataExchange* pDX);    // DDX/DDV support
 
-// Implementation
+	// Implementation
 protected:
 	DECLARE_MESSAGE_MAP()
 };
@@ -262,49 +264,108 @@ void CCalculatorDlg::OnBnClickedButton5()
 void CCalculatorDlg::OnBnClickedButton6()
 {
 	// TODO: Add your control notification handler code here
-	vector<int> v_numbers;
+	vector<char> addition;
 	CString mixed_text; // TCHAR tipindədi bu dəyişən
-	
+
 	all_text.GetWindowText(mixed_text);
-	
-	CT2CA temporary_used_for_string_conversion(mixed_text); // TCHAR-dan LPCSTR-a keçid eliyirəm
-	string mixed_string_text(temporary_used_for_string_conversion); // construct a std::string using the LPCSTR input
-	// for more information visit: http://git.io/AD6t
-	
-	//int all_text_length = all_text.GetWindowTextLength();
-	//char* first = new char[all_text_length];
 
-	if (mixed_text.Find(L"+") != -1)
+	int *a = new int[all_text.GetWindowTextLength()];
+
+	if (all_text.GetWindowTextLength() != 0 && mixed_text != " ")
 	{
-		//AfxMessageBox(L"plus var");
-		//strcpy_s(first, CT2A(mixed_text));
-		//string converted_char(first);
-		size_t number_of_specific_character = count(mixed_string_text.begin(), mixed_string_text.end(), '+');
+		CT2CA temporary_used_for_string_conversion(mixed_text); // TCHAR-dan LPCSTR-a keçid eliyirəm
+		string mixed_string_text(temporary_used_for_string_conversion); // construct a std::string using the LPCSTR input
+		// for more information visit: http://git.io/AD6t
 
-		//for (size_t number_of_plus = 0; number_of_plus < number_of_specific_character; number_of_plus++)
-		//{
+		//int all_text_length = all_text.GetWindowTextLength();
+		//char* first = new char[all_text_length];
+
+		if (mixed_text.Find(L"+") != -1)
+		{
+			//AfxMessageBox(L"plus var");
+			//strcpy_s(first, CT2A(mixed_text));
+			//string converted_char(first);
+			
+			size_t number_of_specific_character = count(mixed_string_text.begin(), mixed_string_text.end(), '+');
+
+			//for (size_t number_of_plus = 0; number_of_plus < number_of_specific_character; number_of_plus++)
+			//{
+			/*for (size_t step = 0; step < mixed_string_text.length(); step++)
+			{
+			if (mixed_string_text[step] != '+')
+			v_numbers.push_back(mixed_string_text[step]);
+			}
+			//}*/
+
+			/*
+			 ***************************************
+			 *   plus sayi qeder vector elave et   *
+			 *									   *
+			 *				in future              *
+			 ***************************************
+			*/
+
+
+
+			ofstream yaz("text.txt");
+
 			for (size_t step = 0; step < mixed_string_text.length(); step++)
 			{
-				if (mixed_string_text[step] != '+')
-					v_numbers.push_back(mixed_string_text[step]);
-			}
-		//}
-	
-		ofstream yaz("text.txt");
-	
-	/**
-	 *  duzgun ishlediyini yoxlayiram string-dekileri
-	 *
-	 *	for (size_t i = 0; i < mixed_string_text.length(); i++)
-	 *		yaz << mixed_string_text[i] << "\n";
-	 */	
-	//	yaz << endl << endl << endl << endl;
-		
-		for (auto vec : v_numbers)
-			yaz << vec << '\n';
-	}
-	else 
-		AfxMessageBox(L"plus vardasadsafd");
-	
+				if (isdigit(mixed_string_text[step]))// != '+')
+				{
+					//yaz << mixed_string_text[step] << "\n";
+					//addition.push_back(mixed_string_text[step]);
+					a[step] = mixed_string_text[step];
+				}
+				/*else
+				{
+				//	yaz << endl;
+					a[step] = '0';
+					//addition.push_back('0');
+				}
 
+				yaz << a[step] << endl;*/
+			}
+			/*yaz << endl << endl << endl << endl;
+			for (auto vec : addition)
+				yaz << vec << endl;*/
+
+
+			all_text.SetSel(0, -1);
+			all_text.Clear();
+
+
+			int cem = 0;
+			for (size_t as = 0; as < mixed_string_text.length(); as++)
+			{
+				cem += a[as];
+			}
+			
+			yaz << endl << endl << endl;
+			yaz << cem << endl;
+			//cem = accumulate(addition.begin(), addition.end(), NULL);
+			
+			/*CString cem_;
+			cem_.Format(_T("%d"), cem);
+
+			all_text.SetWindowText(cem_);*/
+
+
+
+			/**
+			*  duzgun ishlediyini yoxlayiram string-dekileri
+			*
+			*	for (size_t i = 0; i < mixed_string_text.length(); i++)
+			*		yaz << mixed_string_text[i] << "\n";
+			*/
+			//	yaz << endl << endl << endl << endl;
+
+			//for (auto vec : v_numbers)
+			//	yaz << vec << '\n';
+		}
+		else
+			MessageBox(L"plus yoxdu", L"Simple calculator", MB_ICONASTERISK);
+	}
+	else
+		MessageBox(L"nese daxil edin", L"Simple calculator", MB_ICONINFORMATION);
 }
