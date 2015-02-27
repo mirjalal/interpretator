@@ -5,7 +5,6 @@
 #pragma once
 #include "afxwin.h"
 
-
 // CCalculatorDlg dialog
 class CCalculatorDlg : public CDialogEx
 {
@@ -39,7 +38,7 @@ public:
 	afx_msg void OnBnClickedButton5();
 	CEdit m_edit2;
 	CString ilkin_eded, ikinci_eded, netice_, convert_olunmus_cavab;
-	double int_ilkin_eded, int_ikinci_eded, cavab;
+	double double_ilkin_eded, double_ikinci_eded, cavab;
 	int btn_id;
 	afx_msg void OnBnClickedButton6();
 };

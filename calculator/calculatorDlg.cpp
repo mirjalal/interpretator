@@ -6,9 +6,6 @@
 #include "calculator.h"
 #include "calculatorDlg.h"
 #include "afxdialogex.h"
-#include <functional>
-#include <numeric>
-#include <algorithm>
 #include <fstream>
 #include <vector>
 
@@ -109,7 +106,6 @@ BOOL CCalculatorDlg::OnInitDialog()
 	SetIcon(m_hIcon, FALSE);		// Set small icon
 
 	// TODO: Add extra initialization here
-	UpdateData(true);
 
 
 	return TRUE;  // return TRUE  unless you set the focus to a control
@@ -172,7 +168,7 @@ void CCalculatorDlg::OnBnClickedButton1()
 	else
 	{
 		all_text.GetWindowText(ilkin_eded);
-		int_ilkin_eded = _wtof(ilkin_eded);
+		double_ilkin_eded = _wtof(ilkin_eded);
 
 		all_text.SetSel(0, -1);
 		all_text.Clear();
@@ -189,7 +185,7 @@ void CCalculatorDlg::OnBnClickedButton2()
 	else
 	{
 		all_text.GetWindowText(ilkin_eded);
-		int_ilkin_eded = _wtof(ilkin_eded);
+		double_ilkin_eded = _wtof(ilkin_eded);
 
 		all_text.SetSel(0, -1);
 		all_text.Clear();
@@ -205,7 +201,7 @@ void CCalculatorDlg::OnBnClickedButton3()
 	else
 	{
 		all_text.GetWindowText(ilkin_eded);
-		int_ilkin_eded = _wtof(ilkin_eded);
+		double_ilkin_eded = _wtof(ilkin_eded);
 
 		all_text.SetSel(0, -1);
 		all_text.Clear();
@@ -222,7 +218,7 @@ void CCalculatorDlg::OnBnClickedButton4()
 	else
 	{
 		all_text.GetWindowText(ilkin_eded);
-		int_ilkin_eded = _wtof(ilkin_eded);
+		double_ilkin_eded = _wtof(ilkin_eded);
 
 		all_text.SetSel(0, -1);
 		all_text.Clear();
@@ -235,22 +231,22 @@ void CCalculatorDlg::OnBnClickedButton4()
 void CCalculatorDlg::OnBnClickedButton5()
 {
 	all_text.GetWindowText(ikinci_eded);
-	int_ikinci_eded = _wtof(ikinci_eded);
+	double_ikinci_eded = _wtof(ikinci_eded);
 
 	if (btn_id == NULL)
 		MessageBox(L"Əvvəlcə əməliyyat düyməsini basın", L"Xəbərdarlıq", MB_ICONINFORMATION);
-	else if (int_ikinci_eded == NULL)
+	else if (double_ikinci_eded == NULL)
 		MessageBox(L"Əvvəlcə əməliyyat düyməsini basın", L"Xəbərdarlıq", MB_ICONWARNING);
 	else
 	{
 		if (btn_id == 1000)
-			cavab = int_ilkin_eded + int_ikinci_eded;
+			cavab = double_ikinci_eded + double_ikinci_eded;
 		if (btn_id == 1001)
-			cavab = int_ilkin_eded - int_ikinci_eded;
+			cavab = double_ikinci_eded - double_ikinci_eded;
 		if (btn_id == 1002)
-			cavab = int_ilkin_eded * int_ikinci_eded;
+			cavab = double_ikinci_eded * double_ikinci_eded;
 		if (btn_id == 1003)
-			cavab = int_ilkin_eded / int_ikinci_eded;
+			cavab = double_ikinci_eded / double_ikinci_eded;
 
 		all_text.SetSel(0, -1);
 		all_text.Clear();
@@ -263,108 +259,51 @@ void CCalculatorDlg::OnBnClickedButton5()
 
 void CCalculatorDlg::OnBnClickedButton6()
 {
-	// TODO: Add your control notification handler code here
-	vector<char> addition;
+	vector<int> numeric_addition;
 	CString mixed_text; // TCHAR tipindədi bu dəyişən
 
 	all_text.GetWindowText(mixed_text);
 
 	int *a = new int[all_text.GetWindowTextLength()];
 
-	if (all_text.GetWindowTextLength() != 0 && mixed_text != " ")
+	if (all_text.GetWindowTextLength() != 0)
 	{
 		CT2CA temporary_used_for_string_conversion(mixed_text); // TCHAR-dan LPCSTR-a keçid eliyirəm
 		string mixed_string_text(temporary_used_for_string_conversion); // construct a std::string using the LPCSTR input
 		// for more information visit: http://git.io/AD6t
 
-		//int all_text_length = all_text.GetWindowTextLength();
-		//char* first = new char[all_text_length];
-
-		if (mixed_text.Find(L"+") != -1)
-		{
-			//AfxMessageBox(L"plus var");
-			//strcpy_s(first, CT2A(mixed_text));
-			//string converted_char(first);
-			
-			size_t number_of_specific_character = count(mixed_string_text.begin(), mixed_string_text.end(), '+');
-
-			//for (size_t number_of_plus = 0; number_of_plus < number_of_specific_character; number_of_plus++)
-			//{
-			/*for (size_t step = 0; step < mixed_string_text.length(); step++)
-			{
-			if (mixed_string_text[step] != '+')
-			v_numbers.push_back(mixed_string_text[step]);
-			}
-			//}*/
-
-			/*
-			 ***************************************
-			 *   plus sayi qeder vector elave et   *
-			 *									   *
-			 *				in future              *
-			 ***************************************
-			*/
-
-
-
-			ofstream yaz("text.txt");
-
-			for (size_t step = 0; step < mixed_string_text.length(); step++)
-			{
-				if (isdigit(mixed_string_text[step]))// != '+')
-				{
-					//yaz << mixed_string_text[step] << "\n";
-					//addition.push_back(mixed_string_text[step]);
-					a[step] = mixed_string_text[step];
-				}
-				/*else
-				{
-				//	yaz << endl;
-					a[step] = '0';
-					//addition.push_back('0');
-				}
-
-				yaz << a[step] << endl;*/
-			}
-			/*yaz << endl << endl << endl << endl;
-			for (auto vec : addition)
-				yaz << vec << endl;*/
-
-
-			all_text.SetSel(0, -1);
-			all_text.Clear();
-
-
-			int cem = 0;
-			for (size_t as = 0; as < mixed_string_text.length(); as++)
-			{
-				cem += a[as];
-			}
-			
-			yaz << endl << endl << endl;
-			yaz << cem << endl;
-			//cem = accumulate(addition.begin(), addition.end(), NULL);
-			
-			/*CString cem_;
-			cem_.Format(_T("%d"), cem);
-
-			all_text.SetWindowText(cem_);*/
-
-
-
-			/**
-			*  duzgun ishlediyini yoxlayiram string-dekileri
-			*
-			*	for (size_t i = 0; i < mixed_string_text.length(); i++)
-			*		yaz << mixed_string_text[i] << "\n";
-			*/
-			//	yaz << endl << endl << endl << endl;
-
-			//for (auto vec : v_numbers)
-			//	yaz << vec << '\n';
-		}
-		else
+		if (mixed_text.Find(L"+") == string::npos) // handling user oyun-çıxartmaları
 			MessageBox(L"plus yoxdu", L"Simple calculator", MB_ICONASTERISK);
+		else if (mixed_string_text[0] == '+') // handling user oyun-çıxartmaları
+		{
+			MessageBox(L"ilk simvol ədəd olmalıdır", L"Simple calculator", MB_ICONASTERISK);
+			all_text.SetSel(0, true);
+			all_text.Clear();
+		}
+		else if (mixed_string_text[all_text.GetWindowTextLength() - 1] == '+') // handling user oyun-çıxartmaları
+		{
+			MessageBox(L"son simvol ədəd olmalıdır", L"Simple calculator", MB_ICONASTERISK);
+			all_text.SetSel(all_text.GetWindowTextLength(), true);
+			all_text.Clear();
+		}
+		else // normal user input
+		{
+			//strcpy_s(first, CT2A(mixed_text)); // the last argument converts the CString to std::string. and the copies content from string array to char array.
+			//string converted_char(first); // this line converts char array to std::string
+
+			size_t number_of_specific_character = count(mixed_string_text.begin(), mixed_string_text.end(), '+'); // finds how many times '+' used in input stream
+			//		size_t count = 0;
+			//		count = mixed_string_text.find("+", count + 1);
+			int iterator_of_for_loop = mixed_string_text.length() + number_of_specific_character;
+			int iterator_of_for_loop_ = mixed_string_text.length() - number_of_specific_character;
+
+			ofstream y("text.txt");
+			// fayldan istifade lazim olsa bura yaz. BAŞQA YERDƏ YARATMA !
+			y.close();
+
+
+
+		}
 	}
 	else
 		MessageBox(L"nese daxil edin", L"Simple calculator", MB_ICONINFORMATION);
