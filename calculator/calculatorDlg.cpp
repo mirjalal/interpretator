@@ -107,7 +107,7 @@ BOOL CCalculatorDlg::OnInitDialog()
 	SetIcon(m_hIcon, FALSE);		// Set small icon
 
 	// TODO: Add extra initialization here
-	GetDlgItem(IDC_EDIT1)->SetFocus();
+	GetDlgItem(IDC_EDIT1)->SetFocus(); // set edit control focus on at program launchs
 
 	return FALSE;  // return TRUE  unless you set the focus to a control
 }
@@ -262,17 +262,6 @@ void CCalculatorDlg::OnBnClickedButton5()
 
 		GetDlgItem(IDC_EDIT1)->SetFocus();
 	}
-
-	/*all_text.GetWindowText(s);
-	i_s = _wtof(s);
-
-	all_text.SetSel(0, -1);
-	all_text.Clear();
-
-	i_r = i_f + i_s;
-	r.Format(_T("%d"), i_r);
-
-	all_text.SetWindowText(r);*/
 }
 
 
