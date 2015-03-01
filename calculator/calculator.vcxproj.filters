@@ -21,9 +21,6 @@
     <ClInclude Include="calculator.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="calculatorDlg.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="stdafx.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -31,6 +28,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Resource.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="calculatorDlg.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -53,9 +53,6 @@
   <ItemGroup>
     <None Include="res\calculator.rc2">
       <Filter>Resource Files</Filter>
-    </None>
-    <None Include="text.txt">
-      <Filter>Source Files</Filter>
     </None>
   </ItemGroup>
   <ItemGroup>

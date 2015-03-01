@@ -36,9 +36,8 @@ public:
 	afx_msg void OnBnClickedButton3();
 	afx_msg void OnBnClickedButton4(); 
 	afx_msg void OnBnClickedButton5();
-	CEdit m_edit2;
-	CString ilkin_eded, ikinci_eded, netice_, convert_olunmus_cavab;
-	double double_ilkin_eded, double_ikinci_eded, cavab;
-	int btn_id;
 	afx_msg void OnBnClickedButton6();
+	CString cs_first, cs_second, cs_result;
+	double i_first, i_second, i_result;
+	int old_id;
 };
